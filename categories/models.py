@@ -3,9 +3,12 @@ from django.db import models
 from django.utils.encoding import force_unicode
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
 from django.core.files.storage import get_storage_class
 
 from django.utils.translation import ugettext_lazy as _
+
 
 from .settings import (RELATION_MODELS, RELATIONS, THUMBNAIL_UPLOAD_PATH,
                         THUMBNAIL_STORAGE)
@@ -44,6 +47,9 @@ class Category(CategoryBase):
         default="",
         help_text="(Advanced) Any additional HTML to be placed verbatim "
                   "in the &lt;head&gt;")
+    sites = models.ManyToManyField(Site)
+    objects = models.Manager()
+    on_site = CurrentSiteManager()
 
     @property
     def short_title(self):
