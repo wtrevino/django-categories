@@ -55,6 +55,10 @@ class CategoryAdmin(CategoryBaseAdmin):
             'fields': ('order', 'slug'),
             'classes': ('collapse',),
         }),
+        ('Sites', {
+            'fields': ('sites', ),
+            'classes': ('collapse',),
+        }),
     )
 
     if RELATION_MODELS:
